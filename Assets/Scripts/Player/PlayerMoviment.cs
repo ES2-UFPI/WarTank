@@ -6,8 +6,9 @@ public class PlayerMoviment : MonoBehaviour
 {
     private Rigidbody _rb;
     private PlayerInput _input;
-    private int speed = 5;
-    
+    private int _speed = 15;
+    private int _turnSpeed = 50;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,9 +19,12 @@ public class PlayerMoviment : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _rb.velocity = new Vector3(_input.MovementAxis().x * speed, _rb.velocity.y, _input.MovementAxis().y * speed);
+        transform.Rotate(Vector3.up, _input.MovementAxis().x  * _turnSpeed * Time.deltaTime);
 
-        float targetAngle = Mathf.Atan2(_input.MovementAxis().x, _input.MovementAxis().y) *  Mathf.Rad2Deg;
-        _rb.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+        if (_input.MovementAxis().y != 0)
+        {
+            Debug.Log(_input.MovementAxis().y);
+            _rb.velocity = transform.forward * _input.MovementAxis().y * _speed;
+        }
     }
 }
