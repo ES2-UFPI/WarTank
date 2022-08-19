@@ -4,11 +4,14 @@ using Fusion;
 using UnityEngine;
 
 public class CannonBarrel : MonoBehaviour {
-    public GameObject Projectile;
+    public Projectile Projectile;
     public Transform ExitTransform;
 
-    public void Shoot()
+    public void Shoot(float force)
     {
-        Instantiate(Projectile, ExitTransform.position, Quaternion.identity).transform.forward = transform.forward;
+        var proj = Instantiate(Projectile, ExitTransform.position, Quaternion.identity);
+        proj.transform.forward = transform.forward;
+        proj.Speed *= force;
+        proj.ShootProjectile();
     }
 }

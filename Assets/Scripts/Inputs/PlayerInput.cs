@@ -1,23 +1,22 @@
 using System;
 using UnityEngine;
 public class PlayerInput : InputProvider {
-    private Ray _mouseRay;
-    private Camera _mainCamera;
-
+    public override bool IsFireHold() => Input.GetButton("Fire1");
     public override bool IsFirePressed() => Input.GetButtonDown("Fire1");
+    public override bool IsFireReleased() => Input.GetButtonUp("Fire1");
     public override Vector2 MovementAxis() => new(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+    public override float FireForce() => _force;
 
-    private void Start()
+    private float _force = 1;
+    private float _maxForce = 3;
+
+    private void Update()
     {
-        _mainCamera = Camera.main;
-    }
-    public override Vector3 AimPos()
-    {
-        _mouseRay = _mainCamera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(_mouseRay, out RaycastHit hit))
+        if (IsFirePressed()) _force = 1;
+        
+        if (IsFireHold() && _force < _maxForce)
         {
-            return hit.point;
+            _force += Time.deltaTime;
         }
-        return transform.position + transform.forward * 5;
     }
 }

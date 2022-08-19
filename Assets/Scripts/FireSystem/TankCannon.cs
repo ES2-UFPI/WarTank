@@ -6,12 +6,14 @@ using UnityEngine;
 public class TankCannon : MonoBehaviour {
     public CannonTrigger Trigger;
     public CannonBarrel Barrel;
+    public PlayerInput PlayerInput;
+
 
     private void Update()
     {
-        if (Trigger.WantToShoot())
+        if (Trigger.WantToShoot(PlayerInput))
         {
-            Barrel.Shoot();
+            Barrel.Shoot(PlayerInput.FireForce());
         }
     }
 }

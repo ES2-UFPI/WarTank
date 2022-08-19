@@ -7,9 +7,9 @@ public class CannonTrigger : MonoBehaviour {
     
     private float _lastShootTime;
     
-    public bool WantToShoot()
+    public bool WantToShoot(PlayerInput input)
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (input.IsFireReleased())
         {
             if (Time.time - _lastShootTime >= ShootCD)
             {
