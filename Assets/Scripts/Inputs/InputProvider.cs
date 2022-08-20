@@ -4,7 +4,9 @@ using UnityEngine;
 
 public abstract class InputProvider : MonoBehaviour {
 
+    public abstract bool IsFireHold();
     public abstract bool IsFirePressed();
+    public abstract bool IsFireReleased();
     public abstract Vector2 MovementAxis();
-    public abstract Vector3 AimPos();
+    public abstract float FireForce();
 }
