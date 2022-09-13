@@ -22,17 +22,27 @@ public class PlayerMoviment : MonoBehaviour
     {
         if (_input.MovementAxis().x != 0)
         {
-            transform.Rotate(Vector3.up, _input.MovementAxis().x  * _turnSpeed * Time.deltaTime);
+            transform.Rotate(Vector3.up, this.CalcRotate(_input.MovementAxis().x , _turnSpeed , Time.deltaTime));
         }
 
         if (_input.MovementAxis().y != 0)
         {
-            _rb.AddForce(transform.forward * _input.MovementAxis().y * _speed * Time.deltaTime, ForceMode.Impulse);
+            _rb.AddForce(transform.forward * this.CalcMovementForce( _input.MovementAxis().y , _speed , Time.deltaTime), ForceMode.Impulse);
         }
 
         if (_rb.velocity.magnitude > _maxSpeed)
         {
             _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, _maxSpeed);
         }
+    }
+
+    float CalcRotate(float MovementAxisX, float TurnSpeed, float DeltaTime)
+    {
+        return MovementAxisX * TurnSpeed * DeltaTime;
+    }
+
+    float CalcMovementForce(float MovementAxisY, float Speed, float DeltaTime)
+    {
+        return MovementAxisY * Speed * DeltaTime;
     }
 }
