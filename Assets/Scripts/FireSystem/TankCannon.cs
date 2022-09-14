@@ -1,19 +1,24 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Fusion;
 using UnityEngine;
 
-public class TankCannon : MonoBehaviour {
+public class TankCannon : NetworkBehaviour {
     public CannonTrigger Trigger;
     public CannonBarrel Barrel;
-    public PlayerInput PlayerInput;
+    private NetworkInput _prevInput;
 
-
-    private void Update()
+    public override void FixedUpdateNetwork()
     {
-        if (Trigger.WantToShoot(PlayerInput))
+        if (GetInput<NetworkInput>(out var input))
         {
-            Barrel.Shoot(PlayerInput.FireForce());
+            if (Trigger.CantToShoot(input, _prevInput.Buttons))
+            {
+                Barrel.Shoot(input.FireForce, Runner);
+            }
+            
+            _prevInput = input;
         }
     }
 }
