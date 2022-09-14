@@ -10,7 +10,7 @@ using UnityEngine;
 [ScriptHelp(BackColor = EditorHeaderBackColor.Steel)]
 public class InputBehaviourPrototype : Fusion.Behaviour, INetworkRunnerCallbacks {
 
-  public void OnInput(NetworkRunner runner, NetworkInput input) {
+  public void OnInput(NetworkRunner runner, Fusion.NetworkInput input) {
     var frameworkInput = new NetworkInputPrototype();
 
     if (Input.GetKey(KeyCode.W)) {
@@ -64,7 +64,7 @@ public class InputBehaviourPrototype : Fusion.Behaviour, INetworkRunnerCallbacks
     input.Set(frameworkInput);
   }
 
-  public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) { }
+  public void OnInputMissing(NetworkRunner runner, PlayerRef player, Fusion.NetworkInput input) { }
 
   public void OnConnectedToServer(NetworkRunner runner) { }
   public void OnConnectFailed(NetworkRunner runner, NetAddress remoteAddress, NetConnectFailedReason reason) { }

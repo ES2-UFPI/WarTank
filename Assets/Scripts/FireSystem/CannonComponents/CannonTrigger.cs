@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Fusion;
 using UnityEngine;
 
 public class CannonTrigger : MonoBehaviour {
@@ -7,9 +8,9 @@ public class CannonTrigger : MonoBehaviour {
     
     private float _lastShootTime;
     
-    public bool WantToShoot(PlayerInput input)
+    public bool CantToShoot(NetworkInput input, NetworkButtons previous)
     {
-        if (input.IsFireReleased())
+        if (input.Buttons.WasReleased(previous, Buttons.Fire))
         {
             if (Time.time - _lastShootTime >= ShootCD)
             {

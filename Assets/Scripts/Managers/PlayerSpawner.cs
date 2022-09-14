@@ -5,13 +5,26 @@ using Fusion;
 using Fusion.Sockets;
 using UnityEngine;
 
-public class NetworkCallbacks : INetworkRunnerCallbacks {
-    public Action<NetworkRunner> Event_OnShutdown;
-    public Action<NetworkRunner, PlayerRef> Event_OnPlayerJoined;
-    public Action<NetworkRunner, PlayerRef> Event_OnPlayerLeft;
+public class PlayerSpawner : NetworkBehaviour, INetworkRunnerCallbacks {
+    public NetworkPrefabRef PlayerTank;
 
+    public override void Spawned()
+    {
+        Runner.AddCallbacks(this);
+        // if (Object.HasStateAuthority)
+        // {
+        //     foreach (var player in Runner.ActivePlayers)
+        //     {
+        //         Runner.Spawn(PlayerTank, inputAuthority: player);
+        //     }
+        // }
+    }
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
+        if (Object.HasStateAuthority)
+        {
+            Runner.Spawn(PlayerTank, inputAuthority: player);
+        }
     }
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
     {
