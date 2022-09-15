@@ -44,6 +44,8 @@ GameObject:
   - component: {fileID: 6717063606498324517}
   - component: {fileID: 2063302516630854737}
   - component: {fileID: 8481719475656599186}
+  - component: {fileID: 3237689228695465319}
+  - component: {fileID: -2650237527977775306}
   m_Layer: 0
   m_Name: BasicProjectile
   m_TagString: Untagged
@@ -79,8 +81,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f7966f07e8b7004d8f5f6f44c749720, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HitParticle: {fileID: 1905212310982293346, guid: 2daf13ced4b02df47bd45b4a69669956, type: 3}
-  Speed: 15
+  _interpolationDataSource: 0
+  HitParticle:
+    RawGuidValue: 2be277b9a5e4b3347863d60015033e7e
+  _Speed: 13
 --- !u!54 &8481719475656599186
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -97,6 +101,57 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3237689228695465319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6674902950445938064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectInterest: 0
+  DefaultInterestGroups: []
+  DestroyWhenStateAuthorityLeaves: 0
+  AllowStateAuthorityOverride: 1
+  AoiPositionSource: {fileID: 0}
+  Flags: 2305
+  NetworkGuid:
+    RawGuidValue: 38ac497de1dffaa41abed2a2e0b2bbf3
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 2063302516630854737}
+  - {fileID: -2650237527977775306}
+  SimulationBehaviours: []
+--- !u!114 &-2650237527977775306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6674902950445938064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1710889294, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
+  InterpolationSpace: 0
+  InterpolationTarget: {fileID: 3805424356519988504}
+  InterpolateErrorCorrection: 1
+  InterpolatedErrorCorrectionSettings:
+    MinRate: 3.3
+    MaxRate: 10
+    PosBlendStart: 0.25
+    PosBlendEnd: 1
+    PosMinCorrection: 0.025
+    PosTeleportDistance: 2
+    RotBlendStart: 0.1
+    RotBlendEnd: 0.5
+    RotTeleportRadians: 1.5
 --- !u!1 &8247716581629760577
 GameObject:
   m_ObjectHideFlags: 0

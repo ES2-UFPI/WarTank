@@ -7,9 +7,9 @@ public class CannonBarrel : MonoBehaviour {
     public Projectile Projectile;
     public Transform ExitTransform;
 
-    public void Shoot(float force)
+    public void Shoot(float force, NetworkRunner runner)
     {
-        var proj = Instantiate(Projectile, ExitTransform.position, Quaternion.identity);
+        var proj = runner.Spawn(Projectile, ExitTransform.position, Quaternion.identity);
         proj.transform.forward = transform.forward;
         proj.Speed *= force;
         proj.ShootProjectile();
