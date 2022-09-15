@@ -1,27 +1,38 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Fusion;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour {
-    public GameObject HitParticle;
-    public float Speed = 1;
-    private Rigidbody _rb;
+public class Projectile : NetworkBehaviour {
+    public NetworkPrefabRef HitParticle;
+    [Networked]
+    public float Speed { get; set; } = 1;
+    [Networked]
+    public float Damage { get; set; } = 25;
+    private NetworkRigidbody _rb;
     private Collider[] _hit = new Collider[1];
     
     public void ShootProjectile()
     {
-        _rb = GetComponent<Rigidbody>();
-        _rb.velocity = transform.forward * Speed;
+        _rb = GetComponent<NetworkRigidbody>();
+        _rb.Rigidbody.velocity = transform.forward * Speed;
     }
 
-    private void Update()
+    public override void Spawned()
     {
-        transform.forward = _rb.velocity.normalized;
-        if (Physics.OverlapSphereNonAlloc(transform.position, .25f, _hit) > 0)
+        _rb = GetComponent<NetworkRigidbody>();
+    }
+
+    public override void FixedUpdateNetwork()
+    {
+        if (!Object.HasStateAuthority) return;
+        
+        transform.forward = _rb.Rigidbody.velocity.normalized;
+        if (Runner.IsForward && Physics.OverlapSphereNonAlloc(transform.position, .25f, _hit) > 0)
         {
-            Instantiate(HitParticle, _hit[0].ClosestPoint(transform.position), Quaternion.identity);
-            Destroy(gameObject);
+            Runner.Spawn(HitParticle, _hit[0].ClosestPoint(transform.position), Quaternion.identity, onBeforeSpawned: (r, n) => n.GetComponent<DamageArea>().Damage = Damage);
+            Runner.Despawn(Object);
         }
     }
 }
