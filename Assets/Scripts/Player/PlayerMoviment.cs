@@ -36,12 +36,12 @@ public class PlayerMoviment : MonoBehaviour
         }
     }
 
-    float CalcRotate(float MovementAxisX, float TurnSpeed, float DeltaTime)
+    public float CalcRotate(float MovementAxisX, float TurnSpeed, float DeltaTime)
     {
         return MovementAxisX * TurnSpeed * DeltaTime;
     }
 
-    float CalcMovementForce(float MovementAxisY, float Speed, float DeltaTime)
+    public float CalcMovementForce(float MovementAxisY, float Speed, float DeltaTime)
     {
         return MovementAxisY * Speed * DeltaTime;
     }
