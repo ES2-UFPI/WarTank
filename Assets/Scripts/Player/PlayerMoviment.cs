@@ -15,9 +15,12 @@ public class PlayerMoviment : NetworkBehaviour {
     [Networked]
     private float _maxSpeed { get; set; } = 15;
 
+    private AudioSource _source;
+
     public override void Spawned()
     {
         _rb = GetComponent<NetworkRigidbody>();
+        _source = GetComponent<AudioSource>();
     }
 
     public override void FixedUpdateNetwork()
@@ -35,6 +38,18 @@ public class PlayerMoviment : NetworkBehaviour {
             {
                 _rb.Rigidbody.AddForce(transform.forward * input.Dir.y * _speed * Runner.DeltaTime, ForceMode.Impulse);
             }
+        }
+
+        if (_rb.Rigidbody.velocity != Vector3.zero && !_source.isPlaying) {
+
+            _source.Play();
+
+        }
+        else if(_source.isPlaying)
+        {
+
+            _source.Stop();
+
         }
 
         if (_rb.Rigidbody.velocity.magnitude > _maxSpeed)

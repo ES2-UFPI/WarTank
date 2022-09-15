@@ -8,6 +8,7 @@ public class TankCannon : NetworkBehaviour {
     public CannonTrigger Trigger;
     public CannonBarrel Barrel;
     private NetworkInput _prevInput;
+    public AudioClip FireSound;
 
     public override void FixedUpdateNetwork()
     {
@@ -16,6 +17,7 @@ public class TankCannon : NetworkBehaviour {
             if (Trigger.CantToShoot(input, _prevInput.Buttons))
             {
                 Barrel.Shoot(input.FireForce, Runner);
+                SoundManager.Instance.PlaySound(FireSound);
             }
             
             _prevInput = input;
