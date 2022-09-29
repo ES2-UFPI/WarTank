@@ -23,7 +23,7 @@ public class PlayerSpawner : NetworkBehaviour, INetworkRunnerCallbacks {
     {
         if (Object.HasStateAuthority)
         {
-            Runner.Spawn(PlayerTank, inputAuthority: player);
+            Runner.Spawn(PlayerTank, Vector3.up * 2, inputAuthority: player);
         }
     }
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
