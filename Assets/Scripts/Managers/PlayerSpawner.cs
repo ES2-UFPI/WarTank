@@ -11,13 +11,6 @@ public class PlayerSpawner : NetworkBehaviour, INetworkRunnerCallbacks {
     public override void Spawned()
     {
         Runner.AddCallbacks(this);
-        // if (Object.HasStateAuthority)
-        // {
-        //     foreach (var player in Runner.ActivePlayers)
-        //     {
-        //         Runner.Spawn(PlayerTank, inputAuthority: player);
-        //     }
-        // }
     }
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {

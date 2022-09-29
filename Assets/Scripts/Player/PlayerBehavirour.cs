@@ -7,6 +7,11 @@ public class PlayerBehavirour : NetworkBehaviour, IDamagable {
     [Networked]
     private float _health { get; set; } = 100f;
 
+    public override void Spawned()
+    {
+        if (Object.HasInputAuthority)
+            FindObjectOfType<CameraFollow>().SetTarget(transform);
+    }
 
     public void ReceiveDamage(float amount)
     {
