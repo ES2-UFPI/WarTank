@@ -1,11 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Fusion;
-using Fusion.Sockets;
+using System.Diagnostics;
+using UnityEngine;
 
-public class PlayerMoviment : NetworkBehaviour {
+[DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
+public class PlayerMoviment : NetworkBehaviour
+{
     private NetworkRigidbody _rb;
 
     [Networked]
@@ -40,12 +39,13 @@ public class PlayerMoviment : NetworkBehaviour {
             }
         }
 
-        if (_rb.Rigidbody.velocity != Vector3.zero && !_source.isPlaying) {
+        if (_rb.Rigidbody.velocity != Vector3.zero && !_source.isPlaying)
+        {
 
             _source.Play();
 
         }
-        else if(_source.isPlaying)
+        else if (_source.isPlaying)
         {
 
             _source.Stop();
@@ -58,5 +58,8 @@ public class PlayerMoviment : NetworkBehaviour {
         }
     }
 
-    
+    private string GetDebuggerDisplay()
+    {
+        return ToString();
+    }
 }
