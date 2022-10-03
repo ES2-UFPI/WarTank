@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Launcher : MonoBehaviour {
     public NetworkRunner Runner;
+    public NetworkPrefabRef GameManagerPrefabRef;
 
     public void Launch(string session)
     {
@@ -14,6 +15,6 @@ public class Launcher : MonoBehaviour {
         Runner.StartGame(new StartGameArgs()
         { SessionName = session,
           GameMode = GameMode.AutoHostOrClient,
-          Scene = 1, });
+          Scene = 1, Initialized = (runner => runner.Spawn(GameManagerPrefabRef))});
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Fusion;
@@ -10,11 +11,15 @@ public class PlayerBehavirour : NetworkBehaviour, IDamagable {
     public override void Spawned()
     {
         if (Object.HasInputAuthority)
+        {
             FindObjectOfType<CameraFollow>().SetTarget(transform);
+            GameManager.Instance.RPC_SetPlayerNick(Object.InputAuthority, StaticData.PlayerNick);
+        }
     }
 
     public void ReceiveDamage(float amount)
     {
+        if (!Object || !Object.HasStateAuthority) return;
         _health -= amount;
         if (_health <= 0)
             Explode();
@@ -22,6 +27,14 @@ public class PlayerBehavirour : NetworkBehaviour, IDamagable {
 
     private void Explode()
     {
-        Runner.Despawn(Object);
+        if (Object.HasStateAuthority)
+        {
+            Runner.Despawn(Object);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        FindObjectOfType<LevelManager>().CheckWinner();
     }
 }
