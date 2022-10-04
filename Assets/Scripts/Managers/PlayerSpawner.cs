@@ -12,12 +12,15 @@ public class PlayerSpawner : NetworkBehaviour, INetworkRunnerCallbacks {
     {
         Runner.AddCallbacks(this);
     }
+    
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
         if (Object.HasStateAuthority)
         {
             Runner.Spawn(PlayerTank, Vector3.up * 2, inputAuthority: player);
         }
+        
+        
     }
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
     {

@@ -14,7 +14,7 @@ public class TankCannon : NetworkBehaviour {
     {
         if (GetInput<NetworkInput>(out var input))
         {
-            if (Trigger.CantToShoot(input, _prevInput.Buttons))
+            if (Trigger.CantToShoot(input, _prevInput.Buttons) && Object.HasStateAuthority)
             {
                 Barrel.Shoot(input.FireForce, Runner);
                 SoundManager.Instance.PlaySound(FireSound);
