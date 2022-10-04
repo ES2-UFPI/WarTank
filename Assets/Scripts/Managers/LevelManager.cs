@@ -5,6 +5,7 @@ using UnityEngine;
 public class LevelManager : NetworkBehaviour {
     public TMP_Text ResultText;
     public PlayerRef Winner;
+    public AudioClip SoundVictory;
 
     public void CheckWinner()
     {
@@ -28,5 +29,6 @@ public class LevelManager : NetworkBehaviour {
     private void RPC_ShowWinner(string nick)
     {
         ResultText.text = $"Vencedor: {nick}";
+        SoundManager.Instance.PlaySound(SoundVictory);
     }
 }
