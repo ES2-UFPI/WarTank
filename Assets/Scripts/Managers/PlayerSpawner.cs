@@ -1,9 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Fusion;
 using Fusion.Sockets;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PlayerSpawner : NetworkBehaviour, INetworkRunnerCallbacks {
     public NetworkPrefabRef PlayerTank;
@@ -15,9 +15,11 @@ public class PlayerSpawner : NetworkBehaviour, INetworkRunnerCallbacks {
     
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
+        var pos = Random.insideUnitSphere * 2;
+        pos.y = 1;
         if (Object.HasStateAuthority)
         {
-            Runner.Spawn(PlayerTank, Vector3.up * 1, inputAuthority: player);
+            Runner.Spawn(PlayerTank, pos, inputAuthority: player);
         }
         
         

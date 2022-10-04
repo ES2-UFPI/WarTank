@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1206695855397652570}
   - component: {fileID: 1206695855397652569}
+  - component: {fileID: 6478765747637797340}
   m_Layer: 0
   m_Name: Runner
   m_TagString: Untagged
@@ -44,3 +45,17 @@ MonoBehaviour:
   m_Script: {fileID: -1199893898, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6478765747637797340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206695855397652568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 691eed2aba9ce554cb1e54fdc9a17934, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _poolableObjects:
+  - RawGuidValue: 38ac497de1dffaa41abed2a2e0b2bbf3
