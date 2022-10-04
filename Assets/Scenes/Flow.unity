@@ -802,6 +802,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
   ResultText: {fileID: 994102127}
+  SoundVictory: {fileID: 8300000, guid: aa734d79e7d040a489977ba31f389b22, type: 3}
 --- !u!4 &853140346
 Transform:
   m_ObjectHideFlags: 0
