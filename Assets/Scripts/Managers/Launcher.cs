@@ -12,9 +12,11 @@ public class Launcher : MonoBehaviour {
         Runner = Instantiate(Runner);
         Runner.AddCallbacks(GameManager.Callbacks);
         Runner.ProvideInput = true;
+        var pool = Runner.GetComponent<NetworkObjectPoolDefault>();
         Runner.StartGame(new StartGameArgs()
         { SessionName = session,
           GameMode = GameMode.AutoHostOrClient,
-          Scene = 1, Initialized = (runner => runner.Spawn(GameManagerPrefabRef))});
+          ObjectPool = pool,
+          Scene = 1, Initialized = (runner => runner.Spawn(GameManagerPrefabRef)) });
     }
 }
