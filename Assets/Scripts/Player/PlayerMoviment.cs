@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 using Fusion.Sockets;
+using System.Diagnostics;
 
+[DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
 public class PlayerMoviment : NetworkBehaviour {
     private NetworkRigidbody _rb;
 
@@ -58,5 +60,8 @@ public class PlayerMoviment : NetworkBehaviour {
         }
     }
 
-    
+    private string GetDebuggerDisplay()
+    {
+        return ToString();
+    }
 }

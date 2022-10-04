@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Fusion;
 using UnityEngine;
 
+[DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
 public class PlayerBehavirour : NetworkBehaviour, IDamagable {
     [Networked]
     private float _health { get; set; } = 100f;
@@ -36,5 +38,10 @@ public class PlayerBehavirour : NetworkBehaviour, IDamagable {
     private void OnDestroy()
     {
         FindObjectOfType<LevelManager>().CheckWinner();
+    }
+
+    private string GetDebuggerDisplay()
+    {
+        return ToString();
     }
 }
