@@ -1077,6 +1077,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Runner: {fileID: 1206695855397652569, guid: 592aa2d84e466da49b00f7c199ebd9fa, type: 3}
+  GameManagerPrefabRef:
+    RawGuidValue: faa5949fcf4b92d4ab957ce14ef6a05e
 --- !u!4 &819456142
 Transform:
   m_ObjectHideFlags: 0

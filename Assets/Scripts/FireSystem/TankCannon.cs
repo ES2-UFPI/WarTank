@@ -10,11 +10,15 @@ public class TankCannon : NetworkBehaviour {
     private NetworkInput _prevInput;
     public AudioClip FireSound;
 
+    public bool CanShoot(NetworkInput input) {
+        return Trigger.CantToShoot(input, _prevInput.Buttons) && Object.HasStateAuthority;
+    }
+
     public override void FixedUpdateNetwork()
     {
         if (GetInput<NetworkInput>(out var input))
         {
-            if (Trigger.CantToShoot(input, _prevInput.Buttons))
+            if (this.CanShoot(input))
             {
                 Barrel.Shoot(input.FireForce, Runner);
                 SoundManager.Instance.PlaySound(FireSound);
